@@ -1,4 +1,4 @@
--- Prison Life Menu (COMPLETO) - Parte 1
+-- NO JUMPING TOWER Menu (COMPLETO) - Parte 1
 local player = game.Players.LocalPlayer
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -7,7 +7,7 @@ local UIS = game:GetService("UserInputService")
 -- Crear ScreenGui
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 gui.ResetOnSpawn = false
-gui.Name = "PrisonLifeMenu"
+gui.Name = "NoJumpingTowerMenu"
 
 -- Botón toggle movible compatible con teléfono
 local toggleButton = Instance.new("TextButton", gui)
@@ -40,48 +40,6 @@ task.spawn(function()
         if i > #colors then i = 1 end
     end
 end)
-
--- Hacer toggle movible compatible con teléfono
-do
-    local dragging = false
-    local dragInput, mousePos, framePos
-
-    local function updateInput(input)
-        local delta = input.Position - mousePos
-        toggleButton.Position = UDim2.new(
-            0,
-            math.clamp(framePos.X.Offset + delta.X, 0, gui.AbsoluteSize.X - toggleButton.AbsoluteSize.X),
-            0,
-            math.clamp(framePos.Y.Offset + delta.Y, 0, gui.AbsoluteSize.Y - toggleButton.AbsoluteSize.Y)
-        )
-    end
-
-    toggleButton.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            mousePos = input.Position
-            framePos = toggleButton.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    toggleButton.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement then
-            dragInput = input
-        end
-    end)
-
-    UIS.InputChanged:Connect(function(input)
-        if input == dragInput and dragging then
-            updateInput(input)
-        end
-    end)
-end
 
 -- Frame principal
 local frame = Instance.new("Frame", gui)
@@ -120,7 +78,7 @@ local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1,0,0,32)
 title.Position = UDim2.new(0,0,0,5)
 title.BackgroundTransparency = 1
-title.Text = "PRISON LIFE MENU"
+title.Text = "NO JUMPING TOWER"
 title.Font = Enum.Font.GothamBold
 title.TextSize = 20
 title.TextColor3 = Color3.fromRGB(0,153,255)
@@ -245,11 +203,6 @@ player.CharacterAdded:Connect(function()
 end)
 
 -- Fin Parte 1
-
--- Prison Life Menu (COMPLETO) - Parte 2
--- Aquí siguen todos los botones MAIN, TP, MORE SCRIPT tal cual me enviaste
--- Anti Hit, Free Jump y créditos en cada submenu ya están incluidos
-
 
 -- MAIN Buttons funcionales
 subMAIN.MouseButton1Click:Connect(function()
